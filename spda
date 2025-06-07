@@ -1,44 +1,91 @@
+import csv
+import time
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 import os
-import time
 
-load_dotenv() 
-
-# --- Your login credentials ---
+# Load environment variables
+load_dotenv()
 USERNAME = os.getenv("SPADA_USERNAME")
 PASSWORD = os.getenv("SPADA_PASSWORD")
 
-# --- Chrome options (headless for server use) ---
-options = Options()
-#options.add_argument("--headless")  # Comment this line if you want to see the browser
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
+# Load schedule
+def load_schedule(csv_file):
+    with open(csv_file, newline='', encoding='utf-8') as f:
+        return list(csv.DictReader(f))
 
-# --- ChromeDriver setup ---
-service = Service("chromedriver.exe")  # Adjust if chromedriver is elsewhere
-driver = webdriver.Chrome(service=service, options=options)
+# Find current class
+def get_current_class(schedule):
+    now = datetime.now()
+    day_map = {
+        "Monday": "Senin", "Tuesday": "Selasa", "Wednesday": "Rabu",
+        "Thursday": "Kamis", "Friday": "Jumat", "Saturday": "Sabtu", "Sunday": "Minggu"
+    }
+    today = day_map[now.strftime("%A")]
+    current_time = now.strftime("%H:%M")
 
-try:
-    # Go to login page
+    for entry in schedule:
+        if entry["Day"] == today:
+            start_time, end_time = entry["Time"].split(" - ")
+            if start_time <= current_time <= end_time:
+                return entry["CourseName"]
+    return None
+
+# Launch browser
+def init_driver(headless=False):
+    options = Options()
+    if headless:
+        options.add_argument("--headless")
+    return webdriver.Chrome(options=options)
+
+# Main automation
+def login_and_check(course_name):
+    driver = init_driver()
     driver.get("https://spada.upnyk.ac.id/login/index.php")
-    time.sleep(3)
-
-    # Enter username and password
+    
+    # Login
     driver.find_element(By.ID, "username").send_keys(USERNAME)
     driver.find_element(By.ID, "password").send_keys(PASSWORD)
-    driver.find_element(By.ID, "password").send_keys(Keys.RETURN)
-    time.sleep(5)
+    driver.find_element(By.ID, "loginbtn").click()
+    time.sleep(4)
 
-    # Visit the attendance page
-    driver.get("https://spada.upnyk.ac.id/mod/attendance/view.php?id=651934")
-    time.sleep(10)  # Wait so the page fully loads or for manual inspection
+    # Search for course
+    found = False
+    courses = driver.find_elements(By.PARTIAL_LINK_TEXT, course_name)
+    for course in courses:
+        if course_name.lower() in course.text.lower():
+            course.click()
+            found = True
+            break
     
-    # attendance script not yet implemented
+    if not found:
+        print("Course not found.")
+        print(course_name)
+        driver.quit()
+        return
 
-finally:
+    time.sleep(3)
+
+    # Look for 'Presensi' or 'Attendance'
+    links = driver.find_elements(By.TAG_NAME, "a")
+    for link in links:
+        if "presensi" in link.text.lower() or "attendance" in link.text.lower():
+            print(f"Found attendance link: {link.text}")
+            link.click()
+            break
+
+    time.sleep(5)
     driver.quit()
+
+# Run everything
+schedule = load_schedule("schedule.csv")
+current_class = get_current_class(schedule)
+
+if current_class:
+    print(f"Current class: {current_class}")
+    login_and_check(current_class)
+else:
+    print("No class at the moment.")
