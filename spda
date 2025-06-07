@@ -37,6 +37,8 @@ try:
     # Visit the attendance page
     driver.get("https://spada.upnyk.ac.id/mod/attendance/view.php?id=651934")
     time.sleep(10)  # Wait so the page fully loads or for manual inspection
+    
+    # attendance script not yet implemented
 
 finally:
     driver.quit()
