@@ -17,7 +17,7 @@ Easily automate your attendance process with this script.
 
 ---
 
-### 2. Add Your Schedule (you cam ask some random llm)
+### 2. Add Your Schedule (you can ask some random llm)
 
 1. Create a CSV file (e.g., `schedule.csv`) with the following format:
 
