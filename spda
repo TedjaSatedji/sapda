@@ -1,0 +1,42 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from dotenv import load_dotenv
+import os
+import time
+
+load_dotenv() 
+
+# --- Your login credentials ---
+USERNAME = os.getenv("SPADA_USERNAME")
+PASSWORD = os.getenv("SPADA_PASSWORD")
+
+# --- Chrome options (headless for server use) ---
+options = Options()
+#options.add_argument("--headless")  # Comment this line if you want to see the browser
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# --- ChromeDriver setup ---
+service = Service("C:/Users/dewaa/Documents/MEGA/College Offline/SEM4/SCPK/prac/chromedriver.exe")  # Adjust if chromedriver is elsewhere
+driver = webdriver.Chrome(service=service, options=options)
+
+try:
+    # Go to login page
+    driver.get("https://spada.upnyk.ac.id/login/index.php")
+    time.sleep(3)
+
+    # Enter username and password
+    driver.find_element(By.ID, "username").send_keys(USERNAME)
+    driver.find_element(By.ID, "password").send_keys(PASSWORD)
+    driver.find_element(By.ID, "password").send_keys(Keys.RETURN)
+    time.sleep(5)
+
+    # Visit the attendance page
+    driver.get("https://spada.upnyk.ac.id/mod/attendance/view.php?id=651934")
+    time.sleep(10)  # Wait so the page fully loads or for manual inspection
+
+finally:
+    driver.quit()
