@@ -30,7 +30,7 @@ Easily automate your attendance process with this script.
 
     **CSV Example:**
     ```csv
-    CourseName,Day,Time,AttendanceURL
+    CourseName,Day,Time
     Pendidikan Kewarganegaraan,Rabu,09:30 - 11:15
     Technopreneurship,Jumat,07:00 - 09:30
     Analisa Algoritma,Senin,10:00 - 11:45
