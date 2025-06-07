@@ -6,7 +6,16 @@ Easily automate your attendance process with this script.
 
 ## Getting Started
 
-### 1. Add Your Credentials
+### 1. Install Dependencies
+
+1. Install the dependencies using pip:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+---
+
+### 2. Add Your Credentials
 
 1. Create a new `.env` file in the project root.
 2. Add the following variables:
@@ -17,7 +26,7 @@ Easily automate your attendance process with this script.
 
 ---
 
-### 2. Add Your Schedule (you can ask some random llm)
+### 3. Add Your Schedule
 
 1. Create a CSV file (e.g., `schedule.csv`) with the following format:
 
