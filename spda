@@ -20,7 +20,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
 # --- ChromeDriver setup ---
-service = Service("C:/Users/dewaa/Documents/MEGA/College Offline/SEM4/SCPK/prac/chromedriver.exe")  # Adjust if chromedriver is elsewhere
+service = Service("chromedriver.exe")  # Adjust if chromedriver is elsewhere
 driver = webdriver.Chrome(service=service, options=options)
 
 try:
