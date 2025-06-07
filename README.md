@@ -21,20 +21,21 @@ Easily automate your attendance process with this script.
 
 1. Create a CSV file (e.g., `schedule.csv`) with the following format:
 
-    | CourseName                           | Day    | Time           |
-    |--------------------------------------|--------|----------------|
-    | Pendidikan Kewarganegaraan           | Rabu   | 09:30 - 11:15  |
-    | Technopreneurship                    | Jumat  | 07:00 - 09:30  |
-    | Analisa Algoritma                    | Senin  | 10:00 - 11:45  |
-    | Otomata Dan Pengantar Kompilasi      | Rabu   | 12:00 - 14:30  |
+    | CourseName                | Day     | Time           |
+    |---------------------------|---------|----------------|
+    | Data Science Basics       | Senin   | 08:15 - 10:00  |
+    | Web Development           | Selasa  | 13:00 - 15:30  |
+    | Cloud Computing           | Kamis   | 09:45 - 11:15  |
+    | Machine Learning Intro    | Jumat   | 10:30 - 12:00  |
 
     **CSV Example:**
     ```csv
     CourseName,Day,Time
-    Pendidikan Kewarganegaraan,Rabu,09:30 - 11:15
-    Technopreneurship,Jumat,07:00 - 09:30
-    Analisa Algoritma,Senin,10:00 - 11:45
-    Otomata Dan Pengantar Kompilasi,Rabu,12:00 - 14:30
+    Data Science Basics,Senin,08:15 - 10:00
+    Web Development,Selasa,13:00 - 15:30
+    Cloud Computing,Kamis,09:45 - 11:15
+    Machine Learning Intro,Jumat,10:30 - 12:00
+    ```
     ```
 
 2. Place the CSV file in the root folder of the project.
