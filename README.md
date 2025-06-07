@@ -36,7 +36,6 @@ Easily automate your attendance process with this script.
     Cloud Computing,Kamis,09:45 - 11:15
     Machine Learning Intro,Jumat,10:30 - 12:00
     ```
-    ```
 
 2. Place the CSV file in the root folder of the project.
 
