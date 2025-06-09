@@ -22,6 +22,8 @@ Easily automate your attendance process with this script.
     ```env
     SPADA_USERNAME=your_username
     SPADA_PASSWORD=your_password
+    TELEGRAM_TOKEN=your_telegram_bot_token
+    TELEGRAM_CHAT_ID=your_telegram_chat_id
     ```
 
 ---
@@ -44,8 +46,21 @@ Easily automate your attendance process with this script.
     Web Development,Selasa,13:00 - 15:30
     Cloud Computing,Kamis,09:45 - 11:15
     Machine Learning Intro,Jumat,10:30 - 12:00
+    ```
 
 2. Place the CSV file in the root folder of the project.
+
+---
+
+### 4. Telegram Notifications
+
+This script can send notifications to your Telegram account using a bot.  
+To enable this:
+
+1. [Create a Telegram bot](https://core.telegram.org/bots#6-botfather) and get the bot token.
+2. Get your chat ID (you can use [@userinfobot](https://t.me/userinfobot) on Telegram).
+3. Add `TELEGRAM_TOKEN` and `TELEGRAM_CHAT_ID` to your `.env` file as shown above.
+4. The script will send messages for attendance status and errors.
 
 ---
 
