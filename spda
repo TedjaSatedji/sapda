@@ -107,7 +107,17 @@ def login_and_attend(course_name):
         time.sleep(2)
 
         # Click the "Present" radio button
-        driver.find_element(By.XPATH, "//input[@type='radio' and @value='1']").click()
+        labels = driver.find_elements(By.CSS_SELECTOR, "label.form-check-label")
+
+        for label in labels:
+            try:
+                span = label.find_element(By.CLASS_NAME, "statusdesc")
+                if span.text.strip().lower() == "present":
+                    radio = label.find_element(By.TAG_NAME, "input")
+                    radio.click()
+                    break
+            except Exception as e:
+                continue  # Skip labels that don't match structure
 
         # Click the save/submit button
         driver.find_element(By.ID, "id_submitbutton").click()
