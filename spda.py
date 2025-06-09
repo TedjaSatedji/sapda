@@ -60,7 +60,7 @@ def login_and_attend(course_name):
     driver.find_element(By.ID, "username").send_keys(USERNAME)
     driver.find_element(By.ID, "password").send_keys(PASSWORD)
     driver.find_element(By.ID, "loginbtn").click()
-    time.sleep(4)
+    time.sleep(3)
 
     # Search for course
     found = False
@@ -76,7 +76,7 @@ def login_and_attend(course_name):
         driver.quit()
         return
 
-    time.sleep(3)
+    time.sleep(2)
 
     # Look for 'Presensi' or 'Attendance'
     links = driver.find_elements(By.TAG_NAME, "a")
