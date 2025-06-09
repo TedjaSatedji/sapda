@@ -45,7 +45,7 @@ def get_current_class(schedule):
     return None
 
 # Launch browser
-def init_driver(headless=False):
+def init_driver(headless=True):
     options = Options()
     if headless:
         options.add_argument("--headless")
@@ -123,7 +123,7 @@ def login_and_attend(course_name):
         driver.find_element(By.ID, "id_submitbutton").click()
 
         print("✅ Attendance submitted!")
-        send_telegram("✅ Attendance submitted successfully.")
+        send_telegram(f"✅ {course_name} Attendance submitted successfully.")
         attendance_done = True
 
     except Exception as e:
@@ -132,7 +132,7 @@ def login_and_attend(course_name):
     # Handle notification if it wasn't done
     if not attendance_done:
         print("❌ No attendance available.")
-        send_telegram("❌ No attendance available.")
+        send_telegram(f"❌ No attendance for {course_name} available.")
 
     driver.quit()
         
