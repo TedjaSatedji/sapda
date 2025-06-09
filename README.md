@@ -1,6 +1,6 @@
 # Automatic Attendance Script (Work in Progress)
 
-Easily automate your attendance process with this script.
+Easily automate your attendance process with this selenium script.
 
 ---
 
