@@ -1,4 +1,4 @@
-#SPADA Automatic Attendance Script (Work in Progress)
+# SPADA Automatic Attendance Script (Work in Progress)
 
 Easily automate your SPADA attendance process with this selenium script.
 
